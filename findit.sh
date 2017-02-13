@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Here's the first line of code to write to do the first homework assignment.
 #
@@ -12,3 +12,15 @@
 
 dir=$1
 
+# check if the directory exists
+if [ ! -d "$dir" ]; then
+    echo "Error: directory does not exist."
+fi
+
+# loop over files in that directory (extra slashes are fine)
+for file in $dir/*.fits; do
+    # strip the .fits extension, add a .cat, and see if that's there
+    if [ ! -f "${file%.fits}.cat" ]; then
+	echo "File $file does not have a corresponding .cat file."
+    fi
+done
